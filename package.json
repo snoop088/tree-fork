@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",
+    "dnd-core": "^16.0.1",
     "dnd-multi-backend": "^7.0.0-alpha.4",
     "framer-motion": "^6.2.8",
     "react-dnd-html5-backend": "^16.0.1",
@@ -112,5 +113,6 @@
   "bugs": {
     "url": "https://github.com/minop1205/react-dnd-treeview/issues",
     "email": "okuyama@analogic.jp"
-  }
+  },
+  "packageManager": "yarn@3.3.1"
 }

@@ -48,20 +48,23 @@ const getInnerIndex: GetInnerIndex = (listItems, monitor) => {
       index = key + 1;
     }
   });
-
   return index;
 };
 
 const getOuterIndex: GetOuterIndex = (node, nodeEl, monitor) => {
-  const parentList = nodeEl.closest('[role="list"]');
-  const parentListItems = parentList?.querySelectorAll(
-    ':scope > [role="listitem"]'
+  // const parentList = nodeEl.closest(`[role="list${node.parent}"]`);
+  const parentListItems = document.querySelectorAll(
+    `[role="listitem${node.parent}"]`
   );
 
   if (!parentListItems) {
     return null;
   }
-
+  // console.log(
+  //   "outer",
+  //   parentListItems,
+  //   `:scope > [role="listitem${node.parent}"]`
+  // );
   return getInnerIndex(parentListItems, monitor);
 };
 
@@ -95,7 +98,7 @@ export const getDropTarget = <T>(
   }
 
   if (node === null) {
-    const listItems = nodeEl.querySelectorAll(':scope > [role="listitem"]');
+    const listItems = document.querySelectorAll(':scope > [role="listitem0"]');
 
     return {
       id: context.rootId,
@@ -104,7 +107,8 @@ export const getDropTarget = <T>(
   }
 
   const dragSource: DragItem<T> = monitor.getItem();
-  const list = nodeEl.querySelector('[role="list"]');
+  const list = document.querySelector(`[role="list${node.id}"]`);
+  console.log("list", list, "node", node);
   const hoverPosition = getHoverPosition(
     nodeEl,
     monitor.getClientOffset()?.y || 0,
@@ -112,7 +116,8 @@ export const getDropTarget = <T>(
   );
 
   if (!list) {
-    if (hoverPosition === "middle") {
+    if (hoverPosition === "middle" && node.droppable) {
+      // make sure its droppable
       return {
         id: node.id,
         index: 0,
@@ -154,7 +159,9 @@ export const getDropTarget = <T>(
       }
     }
 
-    const listItems = list.querySelectorAll(':scope > [role="listitem"]');
+    const listItems = document.querySelectorAll(
+      `:scope > [role="listitem${node.id}"]`
+    );
 
     return {
       id: node.id,

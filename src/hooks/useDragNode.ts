@@ -17,7 +17,7 @@ const register = (e: DragEvent | TouchEvent): void => {
   const { target } = e;
 
   if (target instanceof HTMLElement) {
-    const source = target.closest('[role="listitem"]');
+    const source = target.closest('[role^="listitem"]');
 
     if (e.currentTarget === source) {
       dragSourceElement = source;

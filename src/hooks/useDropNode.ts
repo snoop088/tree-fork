@@ -66,6 +66,7 @@ export const useDropNode = <T>(
           monitor,
           treeContext
         );
+        console.log("drop target", dropTarget);
 
         if (
           dropTarget === null ||
@@ -80,6 +81,7 @@ export const useDropNode = <T>(
         }
 
         if (dropTarget.id !== dropTargetId || dropTarget.index !== index) {
+          // console.log("show it");
           showPlaceholder(dropTarget.id, dropTarget.index);
         }
       }

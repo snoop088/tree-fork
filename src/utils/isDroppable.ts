@@ -47,8 +47,11 @@ export const isDroppable = <T>(
     if (dropTargetNode === undefined) {
       return dragSourceNode.parent !== 0;
     }
-
-    if (dragSourceNode.parent === dropTargetId || !dropTargetNode.droppable) {
+    // add additional condition to return false to not have manual resort
+    if (
+      dragSourceNode.parent === dropTargetId ||
+      (!dropTargetNode?.droppable && treeContext.insertDroppableFirst)
+    ) {
       return false;
     }
 

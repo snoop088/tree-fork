@@ -85,8 +85,25 @@ export const Node = <T,>(props: Props): ReactElement | null => {
   };
 
   return (
-    <Component ref={containerRef} className={className} role="listitem">
-      {treeContext.render(item, params)}
+    <>
+      <Component
+        className={className}
+        ref={containerRef}
+        role={"listitem" + item.parent}
+      >
+        {/* <div
+          style={{
+            position: "absolute",
+            height:
+              treeContext.tree.filter((node) => node.parent === props.id)
+                .length *
+                32 +
+              32,
+            width: "100%",
+          }}
+        ></div> */}
+        {treeContext.render(item, params)}
+      </Component>
       {enableAnimateExpand ? (
         <AnimateHeight isVisible={open && hasChild}>
           <Container parentId={props.id} depth={props.depth + 1} />
@@ -95,6 +112,6 @@ export const Node = <T,>(props: Props): ReactElement | null => {
         open &&
         hasChild && <Container parentId={props.id} depth={props.depth + 1} />
       )}
-    </Component>
+    </>
   );
 };

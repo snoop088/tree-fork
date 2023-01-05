@@ -50,7 +50,13 @@ export const Container = <T,>(props: Props): ReactElement => {
   const Component = treeContext.listComponent;
 
   return (
-    <Component ref={ref} role="list" {...rootProps} className={className}>
+    <>
+      <Component
+        ref={ref}
+        role={"list" + props.parentId}
+        {...rootProps}
+        className={className}
+      ></Component>
       {view.map((node, index) => (
         <React.Fragment key={node.id}>
           <Placeholder
@@ -67,6 +73,29 @@ export const Container = <T,>(props: Props): ReactElement => {
         listCount={view.length}
         dropTargetId={props.parentId}
       />
-    </Component>
+    </>
+    // <Component
+    //   ref={ref}
+    //   role={"list" + props.parentId}
+    //   {...rootProps}
+    //   className={className}
+    // >
+    //   {view.map((node, index) => (
+    //     <React.Fragment key={node.id}>
+    //       <Placeholder
+    //         depth={props.depth}
+    //         listCount={view.length}
+    //         dropTargetId={props.parentId}
+    //         index={index}
+    //       />
+    //       <Node id={node.id} depth={props.depth} />
+    //     </React.Fragment>
+    //   ))}
+    //   <Placeholder
+    //     depth={props.depth}
+    //     listCount={view.length}
+    //     dropTargetId={props.parentId}
+    //   />
+    // </Component>
   );
 };

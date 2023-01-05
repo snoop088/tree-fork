@@ -25,7 +25,6 @@ export const Placeholder = <T,>(props: Props): ReactElement | null => {
   if (!placeholderRender || !dragSource) {
     return null;
   }
-
   const visible =
     props.dropTargetId === placeholderContext.dropTargetId &&
     (props.index === placeholderContext.index ||

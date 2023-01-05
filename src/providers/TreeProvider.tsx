@@ -42,9 +42,9 @@ export const TreeProvider = <T,>(props: Props<T>): ReactElement => {
 
   const value: TreeState<T> = {
     extraAcceptTypes: [],
-    listComponent: "ul",
-    listItemComponent: "li",
-    placeholderComponent: "li",
+    listComponent: "div",
+    listItemComponent: "div",
+    placeholderComponent: "div",
     sort: true,
     insertDroppableFirst: true,
     enableAnimateExpand: false,
@@ -55,6 +55,7 @@ export const TreeProvider = <T,>(props: Props<T>): ReactElement => {
     onDrop: (dragSource, dropTargetId, placeholderIndex) => {
       // if dragSource is null,
       // it means that the drop is from the outside of the react-dnd.
+
       if (!dragSource) {
         const options: DropOptions<T> = {
           dropTargetId,
