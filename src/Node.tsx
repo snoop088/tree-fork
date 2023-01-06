@@ -19,6 +19,8 @@ import { PlaceholderContext } from "./providers";
 import { NodeModel, RenderParams } from "./types";
 import { isDroppable } from "./utils";
 
+import { useInView } from "react-intersection-observer";
+
 type Props = PropsWithChildren<{
   id: NodeModel["id"];
   depth: number;
@@ -53,7 +55,10 @@ export const Node = <T,>(props: Props): ReactElement | null => {
   }, [preview, treeContext.dragPreviewRender]);
 
   useDragControl(containerRef);
-
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+  });
   const handleToggle = () => treeContext.onToggle(item.id);
 
   const Component = treeContext.listItemComponent;
@@ -102,7 +107,9 @@ export const Node = <T,>(props: Props): ReactElement | null => {
             width: "100%",
           }}
         ></div> */}
-        {treeContext.render(item, params)}
+        <div ref={ref} style={{ height: 32, overflowY: "hidden" }}>
+          {inView && treeContext.render(item, params)}
+        </div>
       </Component>
       {enableAnimateExpand ? (
         <AnimateHeight isVisible={open && hasChild}>

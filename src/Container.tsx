@@ -8,6 +8,7 @@ import { compareItems, isDroppable } from "./utils";
 type Props = PropsWithChildren<{
   parentId: NodeModel["id"];
   depth: number;
+  style?: React.CSSProperties;
 }>;
 
 export const Container = <T,>(props: Props): ReactElement => {
@@ -65,7 +66,9 @@ export const Container = <T,>(props: Props): ReactElement => {
             dropTargetId={props.parentId}
             index={index}
           />
-          <Node id={node.id} depth={props.depth} />
+          <div style={props.style}>
+            <Node id={node.id} depth={props.depth} />
+          </div>
         </React.Fragment>
       ))}
       <Placeholder
