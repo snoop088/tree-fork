@@ -1,5 +1,5 @@
 node_modules/
-dist/
+# dist/ remove this to test from git
 storybook-static/
 .DS_Store
 .yarn/cache
