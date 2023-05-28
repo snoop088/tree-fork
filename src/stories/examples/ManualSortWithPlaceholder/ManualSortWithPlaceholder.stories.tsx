@@ -37,10 +37,25 @@ export default {
 } as Meta<TreeProps<FileProperties>>;
 
 export const ManualSortWithPlaceholderStory = DefaultTemplate.bind({});
+const seeder = (levels: number, items: number) => {
+  let arr = [];
+  for (let i = 0; i < levels; i++) {
+    for (let j = 0; j < items; j++) {
+      arr.push({
+        id: `${i}.${j}`,
+        parent: j === 0 ? "0" : `${i}.0`,
+        droppable: j === 0,
+        text: `File ${i} - ${j}`,
+        data: { fileType: "image", fileSize: "5.0mb" },
+      });
+    }
+  }
+  return arr;
+};
 
 ManualSortWithPlaceholderStory.args = {
-  rootId: 0,
-  tree: sampleData,
+  rootId: "0",
+  tree: seeder(3, 25),
   classes: {
     root: styles.treeRoot,
     draggingSource: styles.draggingSource,

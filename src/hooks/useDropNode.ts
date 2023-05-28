@@ -66,7 +66,6 @@ export const useDropNode = <T>(
           monitor,
           treeContext
         );
-        console.log("drop target", dropTarget);
 
         if (
           dropTarget === null ||

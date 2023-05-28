@@ -108,7 +108,7 @@ export const getDropTarget = <T>(
 
   const dragSource: DragItem<T> = monitor.getItem();
   const list = document.querySelector(`[role="list${node.id}"]`);
-  console.log("list", list, "node", node);
+  // console.log("list", list, "node", node);
   const hoverPosition = getHoverPosition(
     nodeEl,
     monitor.getClientOffset()?.y || 0,
